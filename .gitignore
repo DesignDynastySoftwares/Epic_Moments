@@ -1,0 +1,29 @@
+# ── Dependencies ──
+**/node_modules/
+
+# ── Build output ──
+**/dist/
+**/build/
+
+# ── Environment / secrets (never commit real env files) ──
+**/.env
+.env
+**/.env.*
+**/.env copy
+**/*.env
+!**/.env.example
+**/serviceAccount*.json
+**/*.pem
+
+# ── Media ──
+**/*.mp4
+
+# ── Logs & misc ──
+**/*.log
+npm-debug.log*
+**/.DS_Store
+**/.expo/
+
+# ── Editor ──
+.vscode/*
+!.vscode/extensions.json

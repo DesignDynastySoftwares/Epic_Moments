@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+
+/* ── Global box-sizing reset (prevents % padding/margin overflow) ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ── Global colour palette (shared across all components) ── */
+:root {
+  --pink:        #e91e8c;
+  --pink-dark:   #c2185b;
+  --pink-light:  #fce4f0;
+  --pink-soft:   #fdf5fa;
+  --pink-border: #f4c0da;
+  --purple:      #3d0066;
+  --text:        #1a0030;
+  --text-mid:    #5a3060;
+  --text-muted:  #9a7090;
+  --white:       #ffffff;
+  --card-radius: 14px;
+  --card-shadow: 0 2px 8px rgba(233,30,140,0.08), 0 8px 24px rgba(0,0,0,0.06);
+  --gap:         60px;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Push page content below the fixed 64px navbar (no extra gap) */
+.app-content {
+  padding-top: 64px;
+}
+/* Mobile (≤767px): search now lives inside the 56px navbar (no extra search row). */
+@media (max-width: 767px) {
+  .app-content {
+    padding-top: 56px;
+  }
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+a.active hr {
+  display: block;
+}
+
+.font-prata {
+  font-family: 'Prata', serif;
+  font-weight: 400;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  a.active {
+    background-color: black;
+    color: white;
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Display", serif;
+}
+
+/* Toast messages appear below the fixed navbar, above everything */
+.Toastify__toast-container {
+  z-index: 100000 !important;
+}
+.Toastify__toast-container--top-right,
+.Toastify__toast-container--top-center,
+.Toastify__toast-container--top-left {
+  top: 76px !important;
+}
+@media (max-width: 767px) {
+  .Toastify__toast-container--top-right,
+  .Toastify__toast-container--top-center,
+  .Toastify__toast-container--top-left {
+    top: 120px !important;   /* below 56px navbar + 58px search bar */
+  }
+}

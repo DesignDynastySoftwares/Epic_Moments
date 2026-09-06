@@ -1,0 +1,93 @@
+.ProductSnick {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #b1afb3;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dots Animation */
+.ProductSnick::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 20%);
+  background-size: 50px 50px;
+  animation: moveDots 5s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes moveDots {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+.slider-container {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+}
+
+.slider-title {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.slide-card {
+  background: #5a189a;
+  color: #ffffff;
+  padding: 20px 8px;
+  height: 350px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-card:hover {
+  transform: scale(1.05);
+}
+
+/* Images and videos take same size */
+.product-image,
+.product-video {
+  width: 100%;
+  height: 94%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-card img,
+.slide-card video {
+  width: 100%;
+  height: 94%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.slide-card {
+  padding: 8px;
+  text-align: center;
+}
+
+.product-image.placeholder {
+  background-color: #ddd;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  border-radius: 8px;
+  font-style: italic;
+}

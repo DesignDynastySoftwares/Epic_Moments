@@ -1,0 +1,67 @@
+/* =============================================================
+   LATEST COLLECTION GRID
+   ============================================================= */
+
+.lc-wrap {
+  margin: 0 3%;
+  padding: 0 0 22px;
+}
+
+.lc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.lc-grid__item { width: 100%; min-width: 0; }
+
+/* ── Loading ── */
+.lc-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 20px;
+}
+
+.lc-loading__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  animation: lcDot 1.2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(232, 21, 126, 0.35);
+}
+.lc-loading__dot:nth-child(2) { animation-delay: 0.2s; }
+.lc-loading__dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes lcDot {
+  0%, 80%, 100% { transform: scale(0.55); opacity: 0.3; }
+  40%           { transform: scale(1.2);  opacity: 1.0; }
+}
+
+.lc-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #9a7090;
+  font-size: 1rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .lc-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .lc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  .lc-wrap { padding: 0 16px 16px; }
+}
+/* mobile — 3 cards per row */
+@media (max-width: 600px) {
+  .lc-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+  .lc-wrap { padding: 0 10px 12px; }
+}
+@media (max-width: 420px) {
+  .lc-grid { gap: 6px; }
+  .lc-wrap { padding: 0 8px 10px; }
+}

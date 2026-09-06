@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://myepicmoments.com/sitemap.xml

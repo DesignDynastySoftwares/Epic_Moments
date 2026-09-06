@@ -1,0 +1,272 @@
+/* Layout container for sidebar + product */
+.collection-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Sidebar style - visible on desktop */
+.sidebar-filter {
+  width: 250px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  z-index: 100;
+
+  font-family: ui-monospace;
+  
+  /* Sticky sidebar on large screens */
+  position: sticky;
+  top: 100px;
+
+  /* Makes sidebar scrollable if content overflows */
+  max-height: calc(100vh - 120px); /* adjust based on top offset */
+  overflow-y: auto;
+}
+
+
+
+/* Sidebar header (title + close button) */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.sidebar-header .close-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Product area */
+.product-area {
+  flex: 1;
+}
+
+/* Category section */
+.category-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.category-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.checkbox {
+  margin-right: 8px;
+}
+.category-name {
+  font-size: 14px;
+}
+
+.product-header {
+  position: relative;  /* Required for z-index to work */
+  z-index: 110;       /* Higher than cards or grid items */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: white;   /* Ensures it looks clean above other items */
+  padding: 10px 15px;
+
+  font-family: ui-monospace;
+ 
+}
+.sort-select {
+  border: 1px solid #ccc;
+  padding: 5px 1px;
+  border-radius: 6px;
+  direction: rtl;          /* Right-to-left dropdown */
+        /* Align text inside the select */
+  appearance: none;        /* Optional: removes default arrow styling */
+  background-color: #fff;
+}
+
+.sort-select option {
+  direction: rtl;
+}
+
+
+
+.responsive-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+/* Ensure 2 cards per row on small screens */
+@media (max-width: 600px) {
+  .responsive-collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile-specific styles */
+.filter-toggle-btn {
+  display: none;
+  margin-bottom: 15px;
+  background: #400c70;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .collection-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-filter {
+    position: fixed;
+    top: 200px;
+    left: -300px;
+    height: 100%;
+    width: 250px;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+    overflow-y: auto;
+    border-radius: 0;
+  }
+
+  .sidebar-filter.open {
+    left: 0;
+  }
+
+  .sidebar-header .close-btn {
+    display: block;
+  }
+
+  .filter-toggle-btn {
+    display: block;
+  }
+}
+
+/* Overlay */
+.overlay {
+  display: none;
+}
+.product-header {
+  position: relative;  /* Required for z-index to work */
+  z-index: 110;       /* Higher than cards or grid items */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: white;   /* Ensures it looks clean above other items */
+  padding: 10px 15px;
+}
+
+.left-controls,
+.right-controls {
+  flex-shrink: 0;
+}
+
+.title-container {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.sort-select {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background-color: #fff;
+  direction: rtl;
+}
+
+/* Responsive behavior */
+@media (max-width: 900px) {
+  .product-header {
+   
+   /* or adjust to your site’s header height */
+    left: 0;
+    width: 100%;
+    background: #fff;
+   z-index: 0;
+   position: fixed;
+  top: 80;
+  z-index: 10;
+    padding: 10px 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .responsive-collections-grid {
+    margin-top: 140px; /* create space below fixed header */
+  }
+
+  .filter-toggle-btn {
+    display: block;
+  }
+
+}
+
+@media (max-width: 900px) {
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+  }
+}
+@media (max-width: 600px) {
+/* Mobile-specific styles */
+.filter-toggle-btn {
+  font-size: 10px;
+  padding: 2px 10px;
+ 
+}
+.collection-layout {
+
+  padding: 0px;
+}
+.filter-toggle-btn img {
+  padding: 0px; 
+}
+ .sidebar-filter {
+    position: fixed;
+    top: 150px;
+    left: -300px;
+    height: 100%;
+    width: 250px;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+    overflow-y: auto;
+    border-radius: 0;
+  }
+}
+
+.responsive-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  justify-items: center;
+}
+
+/* Optional: extra spacing and layout control */
+@media (max-width: 480px) {
+  .responsive-collections-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+}

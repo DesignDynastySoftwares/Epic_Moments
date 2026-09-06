@@ -1,0 +1,72 @@
+/* ══════════════════════════════════════════════
+   RELATED PRODUCTS — Epic Moments theme
+   ══════════════════════════════════════════════ */
+
+.rp-section {
+  width: 100%;
+  padding: 8px 0 0;
+}
+
+/* ── Header ── */
+.rp-hd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+/* eyebrow badge — matches home page section eyebrow (stylish italic serif) */
+.rp-hd__eyebrow {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1.2px;
+  font-style: italic;
+  font-family: "DM Serif Display", Georgia, serif;
+  text-transform: none;
+  color: #c2185b;
+  opacity: 0.9;
+}
+@media (max-width: 600px) {
+  .rp-hd__eyebrow { font-size: 11px; }
+}
+.rp-hd::before,
+.rp-hd::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 1.5px;
+  background: #e8157e;
+  opacity: 0.4;
+}
+
+/* ── Grid ── */
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.rp-grid__item { min-width: 0; }
+
+/* Smaller Add to Cart button in related products only */
+.rp-grid .pic__cart-btn {
+  font-size: 0.6rem;
+  padding: 6px 9px;
+  gap: 4px;
+  border-radius: 20px;
+}
+.rp-grid .pic__cart-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .rp-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 860px) {
+  .rp-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 560px) {
+  .rp-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+}

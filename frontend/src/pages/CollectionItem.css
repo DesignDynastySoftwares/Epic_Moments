@@ -1,0 +1,379 @@
+/* ═══ COLLECTION CARDS — Premium look ═══ */
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 12px;
+}
+
+/* ─── Card ─── */
+.col-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #f4c0da;
+  box-shadow: 0 4px 16px rgba(232, 21, 126, 0.08);
+  transition: transform 0.32s cubic-bezier(.22,.68,0,1.2),
+              box-shadow 0.32s ease, border-color 0.32s ease;
+  animation: colCardIn 0.4s ease forwards;
+  opacity: 0;
+}
+
+.col-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(232, 21, 126, 0.20);
+  border-color: #e8157e;
+}
+
+/* ─── Image ─── */
+.col-card__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce4ec 100%);
+}
+
+.col-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.col-card:hover .col-card__img {
+  transform: scale(1.09);
+}
+
+.col-card__no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  color: #d99bc0;
+}
+
+/* ─── Bestseller badge (top-left) ─── */
+.col-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(232, 21, 126, 0.4);
+}
+
+/* ─── Rating chip (bottom-left) ─── */
+.col-card__rating {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a0028;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(4px);
+}
+.col-card__rating-star { color: #ffb400; font-size: 0.7rem; }
+
+/* ─── Wishlist heart (top-right) ─── */
+.col-card__fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  color: #c090b0;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s, color 0.2s, background 0.2s;
+}
+.col-card__fav:hover { transform: scale(1.15); background: #fff; color: #e8157e; }
+.col-card__fav--active { color: #e8157e; }
+.col-card__fav--active svg {
+  animation: col-heart-pop 0.35s cubic-bezier(0.36,0.07,0.19,0.97) both;
+}
+@keyframes col-heart-pop {
+  0%   { transform: scale(1);   }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.85);}
+  100% { transform: scale(1);   }
+}
+
+/* ─── Overlay (gradient + View Product pill) ─── */
+.col-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  background: linear-gradient(0deg, rgba(26, 0, 40, 0.55) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+}
+
+.col-card:hover .col-card__overlay {
+  opacity: 1;
+}
+
+.col-card__overlay span {
+  color: #1a0028;
+  background: #fff;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 9px 18px;
+  border-radius: 30px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  transform: translateY(10px);
+  transition: transform 0.32s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+.col-card:hover .col-card__overlay span {
+  transform: translateY(0);
+}
+
+/* ─── Info section ─── */
+.col-card__info {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #fff;
+}
+
+/* category label */
+.col-card__cat {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #e8157e;
+}
+
+.col-card__name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #2a1030;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* meta: reviews + sold */
+.col-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  color: #9a7090;
+  font-weight: 500;
+}
+.col-card__dot { color: #d0b0c4; }
+
+.col-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #f7e6f0;
+}
+
+.col-card__price {
+  font-size: 1.05rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #e8157e, #c2185b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #e8157e;
+}
+
+/* ─── Cart button ─── */
+.col-card__cart {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.22s, box-shadow 0.22s;
+  box-shadow: 0 4px 12px rgba(232, 21, 126, 0.35);
+}
+
+.col-card__cart:hover {
+  transform: scale(1.15) rotate(-6deg);
+  box-shadow: 0 6px 18px rgba(232, 21, 126, 0.5);
+}
+
+/* ─── Actions (Buy Now + cart) ─── */
+.col-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── Buy Now button (small, next to cart) ─── */
+.col-card__buy {
+  padding: 7px 12px;
+  border: 1.5px solid #e8157e;
+  border-radius: 8px;
+  background: transparent;
+  color: #e8157e;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.22s, color 0.22s, transform 0.18s;
+}
+.col-card__buy:hover {
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  color: #fff;
+}
+.col-card__buy:active { transform: scale(0.95); }
+
+/* Animation */
+@keyframes colCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ Responsive ═══ */
+@media (max-width: 768px) {
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  .col-card { border-radius: 14px; }
+}
+
+/* ─── Mobile 3-per-row — matches ProductItem card pattern ─── */
+@media (max-width: 600px) {
+  .collection-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .col-card { border-radius: 12px; }
+
+  /* body padding + gap — same as .pic__body */
+  .col-card__info {
+    padding: 6px 6px 8px;
+    gap: 3px;
+  }
+
+  /* hide category + reviews meta (same as ProductItem hides desc + rating) */
+  .col-card__cat { display: none; }
+  .col-card__meta { display: none; }
+
+  /* product name — same as .pic__name mobile */
+  .col-card__name {
+    font-size: 0.64rem;
+    line-height: 1.2;
+  }
+
+  /* footer: price + icon button side by side (same as .pic__footer) */
+  .col-card__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin-top: 2px;
+    padding-top: 6px;
+  }
+
+  /* price — same as .pic__price mobile */
+  .col-card__price { font-size: 0.72rem; }
+
+  /* Buy Now text hidden — cart becomes the single icon action */
+  .col-card__buy { display: none; }
+
+  .col-card__actions { gap: 0; }
+
+  /* cart icon button — round 28px (same as .pic__cart-btn mobile) */
+  .col-card__cart {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* smaller "View Product" overlay pill */
+  .col-card__overlay { padding-bottom: 12px; }
+  .col-card__overlay span {
+    font-size: 0.52rem;
+    padding: 5px 10px;
+    letter-spacing: 0.2px;
+    border-radius: 20px;
+  }
+
+  /* rating chip fades out smoothly when overlay (View Product) shows */
+  .col-card__rating {
+    font-size: 0.54rem;
+    padding: 2px 5px;
+    bottom: 5px;
+    left: 5px;
+    gap: 2px;
+    transition: opacity 0.32s ease, transform 0.32s ease;
+  }
+  .col-card__rating-star { font-size: 0.52rem; }
+  .col-card:hover .col-card__rating,
+  .col-card:active .col-card__rating {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+  }
+
+  /* floating chips — same sizing as ProductItem (heart 24px, badge tiny) */
+  .col-card__fav { width: 24px; height: 24px; font-size: 0.68rem; top: 6px; right: 6px; }
+  .col-card__badge { font-size: 0.44rem; padding: 3px 6px; top: 6px; left: 6px; letter-spacing: 0.03em; }
+}
+
+@media (max-width: 400px) {
+  .col-card__name { font-size: 0.6rem; }
+  .col-card__price { font-size: 0.72rem; }
+}
+
+

@@ -1,0 +1,124 @@
+/* ══════════════════════════════════════════════════
+   ADMIN NAVBAR — Epic Moments (pink/purple theme)
+══════════════════════════════════════════════════ */
+.navbar-container {
+  background: linear-gradient(135deg, #1a0033 0%, #3d0066 55%, #7b1fa2 100%);
+  padding: 0.6rem 1.6rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: top 0.3s ease;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(26, 0, 51, 0.28);
+}
+
+/* thin pink accent line at the bottom */
+.navbar-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e8157e, #ff8dc7, #e8157e);
+}
+
+.navbar-logo {
+  height: 46px;
+  width: auto;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* hamburger menu button — mobile only */
+.navbar-menu-btn {
+  display: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 141, 199, 0.4);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.navbar-menu-btn:hover { background: rgba(232, 21, 126, 0.4); }
+
+/* push bell + logout to the right */
+.notification-wrapper {
+  position: relative;
+  margin-left: auto;
+  margin-right: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.notification-bell {
+  font-size: 22px;
+  color: #ffd6ec;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.notification-bell:hover {
+  color: #fff;
+  transform: scale(1.12);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #e8157e;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(232, 21, 126, 0.5);
+  border: 2px solid #2a0a3d;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 141, 199, 0.4);
+  padding: 8px 20px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.logout-btn:hover {
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  border-color: #e8157e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 21, 126, 0.4);
+}
+
+/* show hamburger on tablet + mobile */
+@media (max-width: 900px) {
+  .navbar-menu-btn { display: inline-flex; }
+}
+
+@media (max-width: 600px) {
+  .navbar-container { padding: 0.5rem 1rem; height: 64px; }
+  .navbar-logo { height: 38px; }
+  .navbar-menu-btn { width: 36px; height: 36px; font-size: 20px; margin-right: 10px; }
+  .logout-btn { padding: 6px 14px; font-size: 13px; }
+}

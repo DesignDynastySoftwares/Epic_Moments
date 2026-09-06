@@ -1,0 +1,264 @@
+/* === GRID CONTAINER FOR BEST SELLER === */
+.best-grid-wrapper {
+  display: grid;
+  gap: 5px;
+  padding: 0 20px;
+  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+}
+
+@media (max-width: 1280px) {
+  .best-grid-wrapper {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .best-grid-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .best-grid-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* @media (max-width: 480px) {
+  .best-grid-wrapper {
+    grid-template-columns: 2fr;
+  }
+} */
+
+/* === CARD STYLING === */
+.bc-card-wrapper {
+  width: 295px;
+  height: 440px;
+  background: rgb(249, 247, 247);
+  border: 2px solid #505050;
+  border-radius: 10px;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: box-shadow 0.5s, transform 0.5s;
+  position: relative;
+}
+
+.bc-card-wrapper:hover {
+  transform: scale(1);
+  box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+.bc-card-container {
+  width: 100%;
+  height: 100%;
+}
+
+.bc-card-top {
+  height: 340px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+
+.bc-card-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bc-card-bottom {
+  width: 200%;
+  height: 22%;
+  display: flex;
+  transition: transform 0.5s;
+}
+
+.bc-card-bottom.clicked {
+  transform: translateX(-50%);
+}
+
+.bc-card-left {
+  width: 50%;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0px 0px 20px;
+}
+
+.bc-card-details {
+  font-size: 16px;
+  font-weight: 500;
+  width: 70%;
+}
+
+.bc-product-name {
+  margin: 0;
+  font-weight: 600;
+  color: #16142c;
+}
+
+.bc-product-price {
+  margin: 5px 0 0;
+  color: #16142c;
+}
+
+.bc-card-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
+  background: #400c70;
+  border-left: 1px solid #ddd;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  border-radius: 0 0 8px 0;
+}
+
+.bc-card-cart svg {
+  color: #ffffff;
+  font-size: 20px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.bc-card-cart:hover {
+  background-color: #f5f1fa;
+  transform: scale(1.05);
+}
+
+.bc-card-cart:hover svg {
+  color: #db8631;
+  transform: translateY(3px);
+}
+
+.bc-card-right {
+  width: 50%;
+  background: #400c70;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.bc-card-check {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.bc-card-check svg {
+  color: white;
+}
+
+.bc-description-container {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 140px;
+  height: 140px;
+  background: #400c70;
+  border-radius: 0 0 200px 200px;
+  transition: all 0.5s ease, border-radius 2s ease, top 1s ease;
+  z-index: 9;
+  overflow: hidden;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.bc-description-icon {
+  position: absolute;
+  top: 85px;
+  right: 85px;
+  color: white;
+  font-size: 20px;
+  animation: blink 3s infinite;
+}
+
+.bc-description-text {
+  padding: 5%;
+  opacity: 0;
+  transform: translateY(-200%);
+  transition: opacity 0.3s ease, transform 0.8s ease;
+  color: white;
+  font-size: 13px;
+}
+
+.bc-description-container:hover {
+  width: 100%;
+  height: 80%;
+  top: 0;
+  right: 0;
+  border-radius: 0;
+}
+
+.bc-description-container:hover .bc-description-icon {
+  opacity: 0;
+  top: 15px;
+  right: 15px;
+}
+
+.bc-description-container:hover .bc-description-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === CARD RESPONSIVE HEIGHTS === */
+@media (max-width: 1280px) {
+  .bc-card-wrapper {
+    
+    width: 100%;
+    height: 350px;
+  }
+
+  .bc-card-top {
+    height: 280px;
+  }
+
+  .bc-description-container {
+    top: -60px;
+    right: -60px;
+    width: 130px;
+    height: 120px;
+  }
+  .bc-description-icon {
+  top: 75px;
+  right: 75px;
+  
+}
+}
+@media (max-width: 770px) {
+  .bc-card-wrapper {
+    
+    width: 100%;
+    height: 490px;
+  }
+
+  .bc-card-top {
+    height: 380px;
+  }
+}
+@media (max-width: 500px) {
+  .bc-card-wrapper {
+    height: 300px;
+  }
+
+  .bc-card-top {
+    height: 240px;
+  }
+
+  .bc-card-details {
+    font-size: 14px;
+  }
+
+  .bc-product-price {
+    margin: 2px 0 0;
+  }
+}

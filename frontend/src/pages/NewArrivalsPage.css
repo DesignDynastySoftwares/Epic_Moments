@@ -1,0 +1,161 @@
+/* ═══ NEW ARRIVALS PAGE — Square cards with dark hover overlay ═══ */
+
+.arrivals-page {
+  min-height: 100vh;
+  padding: 100px 5% 60px;
+  background: linear-gradient(160deg, #f0f4ff 0%, #f5f0ff 50%, #fdf2f8 100%);
+}
+
+.arrivals-page__header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.arrivals-page__header h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #4f46e5, #e8157e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.arrivals-page__header p {
+  color: #777;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.arrivals-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.arrivals-page__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  color: #999;
+}
+
+/* ─── Card — square, minimal, dark overlay on hover ─── */
+.arrival-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: arrivalPop 0.4s ease forwards;
+  opacity: 0;
+  background: #fff;
+}
+.arrival-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+}
+
+.arrival-card__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+.arrival-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.arrival-card:hover .arrival-card__img {
+  transform: scale(1.1);
+}
+.arrival-card__no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: #f0f0f0;
+}
+
+/* Dark overlay on hover */
+.arrival-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.arrival-card:hover .arrival-card__overlay {
+  opacity: 1;
+}
+.arrival-card__overlay span {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border: 1.5px solid #fff;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Info below image */
+.arrival-card__info {
+  padding: 12px 14px;
+}
+.arrival-card__info h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.arrival-card__price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+@keyframes arrivalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .arrivals-page { padding: 80px 4% 40px; }
+  .arrivals-page__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .arrivals-page__header h1 { font-size: 1.6rem; }
+}
+
+/* Cart icon + price row */
+.arrival-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.arrival-card__cart {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: #4f46e5;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+.arrival-card__cart:hover {
+  transform: scale(1.15);
+  background: #3730a3;
+}

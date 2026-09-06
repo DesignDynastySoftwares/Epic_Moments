@@ -1,0 +1,189 @@
+/* ══════════════════════════════════════════════════
+   CUSTOMER REVIEWS — Epic Moments pink theme
+══════════════════════════════════════════════════ */
+
+.google-review-carousel-container {
+  padding: 34px 0 4px;
+}
+.google-review-carousel-container .slick-dots {
+  bottom: -6px;
+}
+/* let profile pic peek above the card without being clipped */
+.google-review-carousel-container .slick-list {
+  padding-top: 8px;
+  overflow: visible;
+}
+.google-review-carousel-container .slick-slider {
+  overflow: hidden;
+  padding-top: 4px;
+}
+
+/* ─── Card ────────────────────────────────────── */
+.gr-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #f4c0da;
+  border-radius: 10px;
+  padding: 24px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  max-width: 300px;
+  margin: 34px auto 12px;
+  box-shadow: 0 4px 18px rgba(232, 21, 126, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: visible;
+}
+
+.gr-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(232, 21, 126, 0.18);
+  border-color: #e8157e;
+}
+
+/* ─── Decorative quote ────────────────────────── */
+.gr-quote {
+  position: absolute;
+  top: 4px;
+  left: 18px;
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: rgba(232, 21, 126, 0.14);
+  pointer-events: none;
+}
+
+/* ─── Stars ───────────────────────────────────── */
+.gr-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 9px;
+}
+.gr-star { font-size: 1.05rem; }
+.gr-star--filled { color: #ffb400; }
+.gr-star--empty  { color: #e6d3de; }
+
+/* ─── Review text ─────────────────────────────── */
+.gr-review-text {
+  flex: 1;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #4a2540;
+  font-family: 'Poppins', sans-serif;
+  margin: 0 0 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Footer: name + verified ─────────────────── */
+.gr-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #f5e3ee;
+  padding-top: 11px;
+}
+
+/* ─── Profile pic — top-right corner ──────────── */
+.gr-image-wrap {
+  position: absolute;
+  top: -26px;
+  right: 20px;
+  z-index: 4;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid #ffffff;
+  box-shadow: 0 6px 16px rgba(232, 21, 126, 0.28),
+              0 0 0 2px #e8157e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gr-card:hover .gr-image-wrap {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 10px 22px rgba(232, 21, 126, 0.4),
+              0 0 0 2px #7b1fa2;
+}
+.gr-image { width: 100%; height: 100%; object-fit: cover; }
+.gr-avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8157e, #7b1fa2);
+}
+.gr-avatar-letter {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+}
+.gr-footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.gr-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a0028;
+  margin: 0;
+  text-transform: capitalize;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Verified badge ──────────────────────────── */
+.gr-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #e8157e;
+}
+.gr-verified-icon {
+  background: #e8157e;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ─── Slick dots ──────────────────────────────── */
+.google-review-carousel-container .slick-dots li button:before {
+  color: #e8157e;
+  opacity: 0.3;
+  font-size: 8px;
+}
+.google-review-carousel-container .slick-dots li.slick-active button:before {
+  color: #e8157e;
+  opacity: 1;
+}
+
+/* ─── Responsive ──────────────────────────────── */
+@media (max-width: 768px) {
+  .gr-card {
+    min-height: auto;
+    padding: 22px 16px 14px;
+    margin: 14px 8px 8px;
+  }
+  .gr-review-text { font-size: 0.85rem; -webkit-line-clamp: 2; line-clamp: 2; margin-bottom: 12px; }
+  .gr-image-wrap { width: 50px; height: 50px; top: -22px; right: 16px; }
+  .gr-name { font-size: 0.86rem; }
+  .gr-verified { font-size: 0.64rem; }
+  .google-review-carousel-container { padding: 26px 0 2px; }
+}

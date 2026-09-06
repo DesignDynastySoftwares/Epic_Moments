@@ -1,0 +1,512 @@
+/* ══════════════════════════════════════════════
+   NAVBAR  — Desktop / Tablet / Mobile
+   ══════════════════════════════════════════════ */
+
+/* ── Base bar ── */
+.em-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(252, 247, 249, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  padding: 0 4%;
+  gap: 16px;
+  z-index: 9999;
+  border-bottom: 1px solid rgba(232, 21, 126, 0.10);
+  box-shadow: 0 4px 20px rgba(232, 21, 126, 0.06);
+}
+
+/* ── Logo ── */
+.em-nav__logo {
+  flex-shrink: 0;
+  line-height: 0;
+}
+.em-nav__logo img {
+  height: 44px;
+  object-fit: contain;
+}
+
+/* ── Desktop nav links (center) ── */
+.em-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+.em-nav__links a {
+  color: #444;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.em-nav__links a:hover {
+  color: #e8157e;
+  background: rgba(232,21,126,0.07);
+}
+.em-nav__links a.active {
+  color: #e8157e;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ── Right cluster ── */
+.em-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ────────────────────────────────────
+   SEARCH BOX
+   ──────────────────────────────────── */
+.em-nav__search {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.em-nav__search-form {
+  display: flex;
+  align-items: center;
+  height: 49px;
+  width: 220px;
+  border: 1.5px solid #e8157e;
+  border-radius: 25px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(232,21,126,0.10);
+  transition: width 0.25s ease, box-shadow 0.2s;
+}
+
+.em-nav__search-form:focus-within {
+  width: 260px;
+  box-shadow: 0 4px 16px rgba(232,21,126,0.22);
+}
+
+.em-nav__search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.82rem;
+  color: #333;
+  background: transparent;
+  padding: 0 4px 0 16px;
+  min-width: 0;
+}
+.em-nav__search-input::placeholder { color: #bbb; }
+
+.em-nav__search-icon-btn {
+  background: #e8157e;
+  border: none;
+  cursor: pointer;
+  width: 44px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  border-radius: 0 23px 23px 0;
+  transition: background 0.2s;
+}
+.em-nav__search-icon-btn:hover { background: #c0105e; }
+
+/* ────────────────────────────────────
+   PROFILE DROPDOWN
+   ──────────────────────────────────── */
+.em-nav__profile { position: relative; }
+.em-nav__profile > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.em-nav__profile > button:hover { background: rgba(232,21,126,0.08); }
+.em-nav__profile img { width: 26px; height: 26px; }
+
+.em-nav__profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+  min-width: 140px;
+  z-index: 100;
+  overflow: hidden;
+}
+.em-nav__profile-menu p {
+  padding: 11px 16px;
+  margin: 0;
+  font-size: 0.84rem;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.15s;
+}
+.em-nav__profile-menu p:hover {
+  background: #fce4ec;
+  color: #e8157e;
+}
+
+/* ────────────────────────────────────
+   CART
+   ──────────────────────────────────── */
+.em-nav__cart {
+  position: relative;
+  display: flex;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.em-nav__cart:hover { background: rgba(232,21,126,0.08); }
+.em-nav__cart img { width: 24px; height: 24px; }
+
+/* Wishlist icon */
+.em-nav__wish {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  color: #e8157e;
+  font-size: 20px;
+  transition: background 0.2s, transform 0.2s;
+}
+.em-nav__wish:hover { background: rgba(232,21,126,0.08); transform: scale(1.08); }
+
+.em-nav__cart-badge {
+  position: absolute;
+  top: -1px;
+  right: -3px;
+  background: #e8157e;
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ────────────────────────────────────
+   HAMBURGER — three-line icon
+   ──────────────────────────────────── */
+.em-nav__menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.em-nav__menu-btn:hover { background: rgba(232,21,126,0.08); }
+.em-nav__menu-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+/* ══════════════════════════════════════════════
+   SIDEBAR — slides in from right
+   ══════════════════════════════════════════════ */
+
+.em-nav__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 9998;
+  backdrop-filter: blur(2px);
+}
+
+.em-nav__sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 82%;
+  max-width: 300px;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+}
+.em-nav__sidebar.open { right: 0; }
+
+/* Sidebar header */
+.em-nav__sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0e0ea;
+  background: #fdf2f8;
+  flex-shrink: 0;
+}
+.em-nav__sidebar-top img { height: 36px; object-fit: contain; }
+.em-nav__sidebar-top button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.em-nav__sidebar-top button:hover { background: #fce4ec; color: #e8157e; }
+
+/* Sidebar search */
+.em-nav__sidebar-search {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f5e8f0;
+  flex-shrink: 0;
+}
+.em-nav__sidebar-search form {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  border: 1.5px solid #e8157e;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+}
+.em-nav__sidebar-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.84rem;
+  color: #333;
+  padding: 0 12px;
+  background: transparent;
+}
+.em-nav__sidebar-search input::placeholder { color: #bbb; }
+.em-nav__sidebar-search button {
+  background: #e8157e;
+  border: none;
+  cursor: pointer;
+  width: 42px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: 0 20px 20px 0;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.em-nav__sidebar-search button:hover { background: #c0105e; }
+
+/* Sidebar nav links */
+.em-nav__sidebar-links {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 8px 0;
+}
+.em-nav__sidebar-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid #faf0f6;
+  transition: background 0.15s, color 0.15s;
+}
+.em-nav__sidebar-links a:hover {
+  background: #fdf0f8;
+  color: #e8157e;
+}
+.em-nav__sidebar-links a.active {
+  color: #e8157e;
+  font-weight: 700;
+  background: #fce4ec;
+}
+.em-nav__sidebar-icon {
+  font-size: 1rem;
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Sidebar footer */
+.em-nav__sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #f0e0ea;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.em-nav__sidebar-orders {
+  padding: 11px;
+  background: rgba(232,21,126,0.07);
+  border: 1.5px solid #e8157e;
+  border-radius: 8px;
+  color: #e8157e;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.em-nav__sidebar-orders:hover { background: rgba(232,21,126,0.14); }
+.em-nav__sidebar-logout {
+  padding: 11px;
+  background: none;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.em-nav__sidebar-logout:hover { border-color: #e8157e; color: #e8157e; }
+.em-nav__sidebar-login {
+  padding: 12px;
+  background: #e8157e;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.em-nav__sidebar-login:hover { background: #c0105e; }
+
+/* ── Mobile search bar (hidden on desktop/tablet) ── */
+.em-nav__mobile-search { display: none; }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ══════════════════════════════════════════════ */
+
+/* ── Tablet (769px – 1024px) — laptop-style: keep nav links, shrink to fit ── */
+@media (max-width: 1024px) {
+  .em-nav { gap: 8px; padding: 0 2.5%; }
+
+  /* keep the center nav links visible like on laptop */
+  .em-nav__links { display: flex; flex: 1; gap: 0; }
+  .em-nav__links a {
+    font-size: 0.66rem;
+    padding: 5px 6px;
+    letter-spacing: 0.2px;
+  }
+
+  /* hide hamburger — links are shown */
+  .em-nav__menu-btn { display: none; }
+
+  /* search bar flexes down when space is short */
+  .em-nav__search-form {
+    width: clamp(110px, 16vw, 160px);
+  }
+  .em-nav__search-form:focus-within {
+    width: clamp(140px, 20vw, 190px);
+  }
+}
+
+/* ── Small tablet (≤880px) — tighter: smaller links + search ── */
+@media (max-width: 880px) {
+  .em-nav__links a { font-size: 0.6rem; padding: 4px 4px; }
+  .em-nav__search-form {
+    width: clamp(90px, 14vw, 130px);
+    height: 42px;
+  }
+  .em-nav__search-form:focus-within {
+    width: clamp(110px, 18vw, 150px);
+  }
+  .em-nav__search-input { font-size: 0.74rem; padding: 0 4px 0 10px; }
+  .em-nav__search-icon-btn { width: 34px; }
+  .em-nav__right { gap: 6px; }
+}
+
+/* ── Mobile (≤767px) — search stays INSIDE the navbar ── */
+@media (max-width: 767px) {
+  .em-nav {
+    height: 56px;
+    padding: 0 3%;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .em-nav__logo img { height: 32px; }
+
+  /* Remove flex:1 so links don't take up space when hidden */
+  .em-nav__links {
+    display: none;
+    flex: 0;
+  }
+
+  /* Compact search box inside the navbar */
+  .em-nav__search { display: flex; flex: 1; min-width: 0; }
+  .em-nav__search-form { width: 100%; height: 34px; }
+  .em-nav__search-form:focus-within { width: 100%; }
+  .em-nav__search-input { font-size: 0.72rem; padding: 0 2px 0 8px; }
+  .em-nav__search-input::placeholder { font-size: 0.72rem; }
+  .em-nav__search-icon-btn { width: 30px; font-size: 0.82rem; }
+
+  /* Show profile, wishlist & cart directly in the navbar */
+  .em-nav__profile { display: flex; }
+  .em-nav__profile img { width: 22px; height: 22px; }
+
+  .em-nav__right {
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .em-nav__menu-btn { display: flex; padding: 3px; }
+  .em-nav__cart { padding: 3px; }
+  .em-nav__cart img { width: 20px; height: 20px; }
+  .em-nav__wish { display: flex; font-size: 17px; padding: 3px; }
+
+  /* No separate search bar below the navbar */
+  .em-nav__mobile-search { display: none; }
+}
+
+/* ── Small mobile (≤400px) — tighten spacing, keep all icons ── */
+@media (max-width: 400px) {
+  .em-nav { padding: 0 2%; gap: 5px; }
+  .em-nav__logo img { height: 26px; }
+  .em-nav__search-input { font-size: 0.68rem; }
+  .em-nav__search-icon-btn { width: 28px; }
+  .em-nav__right { gap: 4px; }
+  .em-nav__cart img, .em-nav__profile img { width: 19px; height: 19px; }
+  .em-nav__wish { font-size: 16px; }
+}

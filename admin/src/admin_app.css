@@ -1,0 +1,36 @@
+/* ══════════════════════════════════════════════════
+   ADMIN LAYOUT — Epic Moments
+══════════════════════════════════════════════════ */
+.admin-shell {
+  min-height: 100vh;
+  background: #fdf5fa;
+}
+
+.admin_app {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 72px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.admin-content {
+  flex: 1;
+  min-width: 0;
+  padding: 26px 30px 60px;
+  color: #4a2540;
+  font-size: 15px;
+}
+
+/* Mobile — sidebar becomes a fixed drawer, so content spans full width */
+@media (max-width: 900px) {
+  .admin_app { padding-top: 64px; }
+  .admin-content { padding: 18px 16px 44px; width: 100%; }
+}
+@media (max-width: 600px) {
+  .admin-content { padding: 16px 12px 40px; font-size: 14px; }
+}
+
+/* prevent horizontal overflow across the admin panel */
+html, body { overflow-x: hidden; }
+* { box-sizing: border-box; }

@@ -1,0 +1,363 @@
+/* ══════════════════════════════════════════════
+   COLLECTION PAGE — Epic Moments theme
+   ══════════════════════════════════════════════ */
+
+/* ── Banner ── */
+.cl-banner {
+  background: linear-gradient(135deg, #fce4f0 0%, #f3e8ff 50%, #fce4f0 100%);
+  padding: 28px 1% 22px;
+  text-align: center;
+}
+.cl-banner__eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #e8157e;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.cl-banner__title {
+  margin: 0 0 6px;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1a0028;
+  text-transform: capitalize;
+  line-height: 1.15;
+}
+.cl-banner__sub {
+  margin: 0;
+  font-size: 13.5px;
+  color: #7a4060;
+}
+
+/* ── Layout ── */
+.cl-layout {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 26px 1% 50px;
+  align-items: flex-start;
+}
+
+/* ── Sidebar ── */
+.cl-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #f4c0da;
+  border-radius: 16px;
+  padding: 20px;
+  position: sticky;
+  top: 84px;
+  box-shadow: 0 4px 16px rgba(232, 21, 126, 0.06);
+}
+.cl-sidebar__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.cl-sidebar__head h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a0028;
+}
+.cl-sidebar__close {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #7a4060;
+}
+
+.cl-filter-group__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.cl-filter-group__title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9a6080;
+}
+.cl-clear {
+  background: none;
+  border: none;
+  color: #e8157e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cl-clear:hover { color: #c2185b; }
+
+.cl-cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cl-cat-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border: 1.5px solid #f0dbe8;
+  border-radius: 10px;
+  background: #fff;
+  color: #4a2540;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cl-cat-pill:hover {
+  border-color: #e8157e;
+  background: #fdf2f8;
+}
+.cl-cat-pill.active {
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  border-color: #e8157e;
+  color: #fff;
+  font-weight: 700;
+}
+.cl-cat-pill__check { font-size: 0.75rem; }
+
+.cl-muted { color: #9a7090; font-size: 0.85rem; }
+
+/* ── Main product area ── */
+.cl-main { flex: 1; min-width: 0; }
+
+/* ── Toolbar ── */
+.cl-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f4c0da;
+}
+.cl-toolbar__title {
+  margin: 0;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #e8157e 0%, #7b1fa2 50%, #3d0066 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #e8157e; /* fallback */
+}
+.cl-filter-btn {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(135deg, #e8157e, #c2185b);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cl-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.cl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fce4ec;
+  color: #c2185b;
+  border: 1px solid #f4c0da;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.cl-chip__x { font-size: 0.65rem; opacity: 0.7; }
+.cl-chip:hover { background: #f8d0e0; }
+
+.cl-sort {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.cl-sort label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7a4060;
+}
+.cl-sort select {
+  border: 1.5px solid #f0dbe8;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  color: #4a2540;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.cl-sort select:focus { border-color: #e8157e; }
+
+/* ── Grid ── */
+.cl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ── Empty ── */
+.cl-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #9a7090;
+}
+.cl-empty__icon { font-size: 2.6rem; display: block; margin-bottom: 10px; }
+.cl-empty__btn {
+  margin-top: 14px;
+  background: #e8157e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ── Overlay (mobile) ── */
+.cl-overlay {
+  display: none;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+/* ── Tablet & below — sidebar becomes a slide-in drawer ── */
+@media (max-width: 900px) {
+  .cl-filter-btn { display: inline-flex; }
+
+  .cl-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+
+  .cl-sidebar {
+    position: fixed;
+    top: 64px;            /* start just below the fixed navbar */
+    left: 0;
+    height: calc(100% - 64px);
+    width: 82%;
+    max-width: 300px;
+    border-radius: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 10000;       /* above navbar (9999) so it isn't covered */
+    overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+  .cl-sidebar.open { transform: translateX(0); }
+  .cl-sidebar__close { display: block; }
+
+  /* overlay also starts below the navbar */
+  .cl-overlay { top: 64px; }
+
+  .cl-layout { padding: 20px 4% 40px; gap: 0; }
+  .cl-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+}
+
+/* ── Tablet toolbar — one line, left → right: Filters, Title, Sort ── */
+@media (max-width: 900px) {
+  .cl-toolbar {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+  }
+  /* Filters button first (far left) */
+  .cl-filter-btn { flex: 0 0 auto; order: 1; }
+  /* Title next to it, and it pushes Sort to the far right */
+  .cl-toolbar__title { flex: 0 0 auto; order: 2; margin-right: auto; }
+  /* Sort on the far right */
+  .cl-sort { flex: 0 0 auto; order: 3; margin-left: 0; }
+}
+
+/* ── Small tablet / large phone ── */
+@media (max-width: 680px) {
+  .cl-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .cl-toolbar { gap: 8px; margin-bottom: 16px; }
+  .cl-banner { padding: 20px 15px 15px; }
+  .cl-banner__title { font-size: 22px; }
+  .cl-sort label { display: none; }
+
+  /* smaller Filters button */
+  .cl-filter-btn {
+    gap: 4px;
+    padding: 5px 9px;
+    font-size: 0.62rem;
+    border-radius: 7px;
+  }
+  .cl-filter-btn svg { font-size: 0.72rem; }
+
+  /* smaller sort dropdown */
+  .cl-sort select {
+    padding: 5px 7px;
+    font-size: 0.62rem;
+    border-radius: 7px;
+  }
+
+  /* smaller filter drawer category list */
+  .cl-sidebar__head h3 { font-size: 0.92rem; }
+  .cl-cat-list { gap: 6px; }
+  .cl-cat-pill {
+    padding: 7px 11px;
+    font-size: 0.72rem;
+    border-radius: 8px;
+  }
+  .cl-cat-pill__check { font-size: 0.65rem; }
+}
+
+/* ── Mobile (≤767px): navbar is 56px + a 58px search bar below it ── */
+@media (max-width: 767px) {
+  .cl-sidebar { top: 114px; height: calc(100% - 114px); }
+  .cl-overlay { top: 114px; }
+}
+
+/* banner title — tablet size matches home (26px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .cl-banner__title { font-size: 26px; }
+}
+
+/* ── Small phone ── */
+@media (max-width: 380px) {
+  .cl-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .cl-toolbar__title { font-size: 20px; }
+  .cl-filter-btn { padding: 8px 12px; font-size: 0.8rem; }
+  .cl-sort select { padding: 7px 9px; font-size: 0.78rem; }
+}

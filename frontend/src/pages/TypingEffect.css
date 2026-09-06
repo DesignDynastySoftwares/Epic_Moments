@@ -1,0 +1,164 @@
+/* =============================================================
+   TYPING EFFECT SECTION — Epic Moments
+   Clean pink card on soft background — matches reference
+   ============================================================= */
+
+.Typing_effect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 280px;
+  background: #fdf5fa;
+  padding: 56px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft bokeh blob decorations */
+.Typing_effect::before,
+.Typing_effect::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.Typing_effect::before {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(233, 30, 140, 0.08) 0%, transparent 70%);
+  top: -80px;
+  left: -60px;
+}
+
+.Typing_effect::after {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(233, 30, 140, 0.07) 0%, transparent 70%);
+  bottom: -60px;
+  right: -40px;
+}
+
+.Typing_effect_container {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card */
+.cont_box {
+  width: 52%;
+  max-width: 560px;
+  min-width: 280px;
+  padding: 44px 52px;
+  background: #ffffff;
+  border: 1px solid #f4c0da;
+  border-radius: 20px;
+  box-shadow: 0 6px 32px rgba(233, 30, 140, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* "We Print Your Photo on" label */
+.cont_box h5 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #5a3060;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+/* Typed text wrapper */
+.text_center {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a0030;
+  line-height: 1.2;
+  min-height: 2.4rem;
+}
+
+.wrap {
+  display: inline-block;
+}
+
+.red_color {
+  color: #e91e8c;
+}
+
+/* Blinking cursor */
+.typed-cursor {
+  font-size: 1.6rem;
+  color: #e91e8c;
+  font-weight: 800;
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Pink accent line below heading */
+.cont_box::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: #e91e8c;
+  border-radius: 2px;
+  margin-top: 4px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .cont_box {
+    width: 70%;
+    padding: 36px 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .Typing_effect {
+    min-height: 220px;
+    padding: 40px 16px;
+  }
+
+  .cont_box {
+    width: 100%;
+    min-width: unset;
+    padding: 28px 22px;
+    border-radius: 16px;
+    gap: 8px;
+  }
+
+  .cont_box h5 {
+    font-size: 0.9rem;
+  }
+
+  .text_center {
+    font-size: 1.25rem;
+  }
+
+  .typed-cursor {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .cont_box {
+    padding: 22px 16px;
+  }
+
+  .text_center {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,94 @@
+/* ============================================================
+   ALL REVIEWS PAGE
+   ============================================================ */
+.ar-page {
+  width: 100%;
+  background: #fff;
+  padding-bottom: 50px;
+}
+
+/* ── Hero header ── */
+.ar-hero {
+  text-align: center;
+  padding: 48px 5% 36px;
+  background: linear-gradient(135deg, #fce4f0 0%, #f3e8ff 50%, #fce4f0 100%);
+}
+.ar-hero__eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #e8157e;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.ar-hero__title {
+  margin: 0 0 12px;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(26px, 3.4vw, 42px);
+  font-weight: 700;
+  color: #1a0028;
+  line-height: 1.15;
+}
+.ar-hero__title span { color: #e8157e; }
+.ar-hero__sub {
+  max-width: 620px;
+  margin: 0 auto 26px;
+  font-size: 14.5px;
+  color: #5a3060;
+  line-height: 1.7;
+}
+
+/* stats row */
+.ar-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.ar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ar-stat strong {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #e8157e;
+  line-height: 1;
+}
+.ar-stat span {
+  font-size: 0.8rem;
+  color: #7a4060;
+}
+
+/* ── Reviews grid ── */
+.ar-grid {
+  max-width: 1200px;
+  margin: 36px auto 0;
+  padding: 0 5%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ar-empty {
+  text-align: center;
+  color: #9a7090;
+  font-size: 1rem;
+  padding: 60px 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .ar-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .ar-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .ar-stats { gap: 26px; }
+}
+@media (max-width: 480px) {
+  .ar-grid { grid-template-columns: 1fr; }
+  .ar-hero { padding: 36px 4% 28px; }
+}

@@ -1,0 +1,354 @@
+/* =============================================================
+   DESK DECORATIVES CARD  (dc__)
+   Premium design — same language as ProductItem
+   ============================================================= */
+
+/* ── Section & grid (keep existing decor-* classes working) ── */
+.decor-section  { width: 100%; background: transparent; }
+.decor-main     { position: relative; z-index: 1; margin: 0 3%; padding: 0 0 22px; }
+.decor-empty    { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 1rem; }
+
+.decor-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.decor-grid__item { width: 100%; min-width: 0; }
+
+@media (max-width: 1200px) { .decor-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+@media (max-width: 900px)  { .decor-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; } }
+@media (max-width: 600px)  { .decor-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+                              .decor-section { padding: 20px 15px 15px; }
+                              .decor-main { padding: 0; } }
+@media (max-width: 400px)  { .decor-grid { gap: 6px; } }
+
+/* =============================================================
+   CARD SHELL
+   ============================================================= */
+
+.dc {
+  width: 100%;
+  min-width: 0;
+  display: block;
+  cursor: pointer;
+  outline: none;
+}
+
+.dc:focus-visible { outline: 3px solid var(--pink); outline-offset: 4px; }
+
+.dc__media,
+.dc {
+  border-radius: 10px;
+}
+
+.dc {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--pink-border);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.26s cubic-bezier(.22,.68,0,1.2), box-shadow 0.26s ease;
+  overflow: hidden;
+}
+
+.dc:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(232,21,126,0.16), 0 4px 10px rgba(0,0,0,0.07);
+}
+
+/* shimmer top accent */
+.dc::before {
+  content: "";
+  position: absolute;           /* hoisted to .dc which is relative via border-radius stacking */
+  display: none;                /* using ::before on media instead — see below */
+}
+
+/* =============================================================
+   IMAGE AREA
+   ============================================================= */
+
+.dc__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--pink-soft) 0%, var(--pink-light) 100%);
+  flex-shrink: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+/* shimmer top accent on media */
+.dc__media::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink), #ff6db3, var(--pink-dark), #ff6db3, var(--pink));
+  background-size: 300% 100%;
+  animation: dc-shimmer 3s linear infinite;
+  z-index: 4;
+}
+
+@keyframes dc-shimmer {
+  0%   { background-position: 0% 0; }
+  100% { background-position: 300% 0; }
+}
+
+.dc__img,
+.dc__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.44s cubic-bezier(.22,.68,0,1.1);
+}
+
+.dc:hover .dc__img,
+.dc:hover .dc__video {
+  transform: scale(1.08);
+}
+
+.dc__no-media {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* dark gradient overlay — fades in on hover for panel readability */
+.dc__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30,0,30,0.65) 0%, rgba(30,0,30,0.10) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dc:hover .dc__overlay { opacity: 1; }
+
+/* discount badge — top left */
+.dc__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(232,21,126,0.40);
+}
+
+/* wishlist heart — top right */
+.dc__heart {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dc__heart:hover     { background: var(--pink-light); transform: scale(1.12); }
+.dc__heart--active   { background: var(--pink-light); }
+.dc__heart--active .dc__heart-svg {
+  animation: dc-heart-pop 0.35s cubic-bezier(0.36,0.07,0.19,0.97) both;
+}
+
+@keyframes dc-heart-pop {
+  0%   { transform: scale(1);   }
+  40%  { transform: scale(1.6); }
+  70%  { transform: scale(0.88);}
+  100% { transform: scale(1);   }
+}
+
+/* =============================================================
+   SLIDE-UP HOVER PANEL  (inside image)
+   ============================================================= */
+
+.dc__hover-panel {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 12px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(.22,.68,0,1.15), opacity 0.26s ease;
+}
+
+.dc:hover .dc__hover-panel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* product name in panel */
+.dc__hover-name {
+  margin: 0;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(11px, 1.1vw, 14px);
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+/* price + customize row */
+.dc__hover-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+}
+
+.dc__hover-price {
+  font-size: clamp(13px, 1.3vw, 16px);
+  font-weight: 900;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.30);
+}
+
+.dc__hover-btn {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(120deg, #b8862a 0%, #e8bf6a 45%, #f5d888 60%, #c9973a 100%);
+  background-size: 250% 100%;
+  color: #3a003d;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  border-radius: 30px;
+  padding: 5px 11px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(200,150,30,0.38);
+  transition: background-position 0.4s ease, transform 0.2s;
+  animation: dc-btn-entry 0.4s cubic-bezier(.22,.68,0,1.2) both;
+  animation-play-state: paused;
+}
+
+.dc:hover .dc__hover-btn {
+  animation-play-state: running;
+  background-position: 100% 0;
+}
+
+@keyframes dc-btn-entry {
+  0%   { transform: scale(0.7) translateY(6px); opacity: 0; }
+  60%  { transform: scale(1.06) translateY(-1px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* =============================================================
+   BODY (below image — always visible)
+   ============================================================= */
+
+.dc__body {
+  padding: 10px 11px 12px;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  border-top: 1px solid var(--pink-border);
+}
+
+.dc__name {
+  margin: 0;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 100%;
+}
+
+.dc__price-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.dc__price {
+  font-size: clamp(12px, 1.2vw, 15px);
+  font-weight: 900;
+  color: var(--pink);
+  line-height: 1;
+}
+
+.dc__original {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+
+@media (max-width: 768px) {
+  .dc__name   { font-size: 11px; }
+  .dc__price  { font-size: 12px; }
+  .dc__body   { padding: 8px 8px 10px; }
+}
+
+@media (max-width: 480px) {
+  .dc__hover-panel { padding: 9px 9px 11px; }
+  .dc__hover-btn   { font-size: 7px; padding: 4px 8px; }
+}
+
+/* mobile — smaller discount badge (placed after base rule so it wins) */
+@media (max-width: 600px) {
+  .dc__badge {
+    font-size: 6px;
+    padding: 1px 5px;
+    top: 5px;
+    left: 5px;
+    letter-spacing: 0;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 400px) {
+  .dc__badge { font-size: 5px; padding: 1px 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

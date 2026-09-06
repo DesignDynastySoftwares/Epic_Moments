@@ -1,0 +1,308 @@
+/* =============================================================
+   POPULAR PRODUCTS — Horizontal Slider
+   Uses global color palette variables
+   ============================================================= */
+
+.pp-section {
+  width: 100%;
+  background: transparent;
+}
+
+/* ── Slider wrapper with arrows ── */
+.pp-slider-wrap {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Scrollable track ── */
+.pp-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 8px 4px 12px;
+  flex: 1;
+}
+
+.pp-track::-webkit-scrollbar { display: none; }
+
+/* ── Each item slot ── */
+.pp-track__item {
+  flex: 0 0 180px;
+  scroll-snap-align: start;
+}
+
+/* ── Arrow buttons ── */
+.pp-arrow {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--pink-border);
+  background: var(--white);
+  color: var(--text);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.22s;
+  z-index: 2;
+}
+
+.pp-arrow:hover {
+  background: var(--pink);
+  color: var(--white);
+  border-color: var(--pink);
+  box-shadow: 0 4px 14px rgba(233,30,140,0.30);
+}
+
+/* ── Empty ── */
+.pp-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+}
+
+/* ── CARD ── */
+.pp-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--pink-border);
+  box-shadow: var(--card-shadow);
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  transition: transform 0.25s cubic-bezier(.22,.68,0,1.2),
+              box-shadow 0.25s ease;
+}
+
+.pp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(233,30,140,0.14);
+}
+
+/* ── Media ── */
+.pp-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--pink-soft);
+}
+
+.pp-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.pp-card:hover .pp-card__img { transform: scale(1.07); }
+
+.pp-card__no-media {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  background: var(--pink-light);
+}
+
+/* ── Badges ── */
+.pp-card__badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  padding: 6px 4px;
+  width: 46px;
+  height: 46px;
+  text-align: center;
+}
+
+.pp-card__badge--seller {
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  color: var(--white);
+  box-shadow: 0 3px 10px rgba(233,30,140,0.40);
+}
+
+.pp-card__badge--discount {
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  color: var(--white);
+  border-radius: 20px;
+  width: auto;
+  height: auto;
+  padding: 4px 8px;
+  font-size: 0.66rem;
+}
+
+/* ── Body ── */
+.pp-card__body {
+  padding: 10px 10px 12px;
+  background: var(--pink-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pp-card__name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pp-card__price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pp-card__price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--pink);
+}
+
+.pp-card__original {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* ── Meta row: sales (left) + rating (right) ── */
+.pp-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.pp-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  font-weight: 600;
+}
+
+.pp-card__star {
+  color: #f5a623;
+  font-size: 0.78rem;
+}
+
+.pp-card__count {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── Category ── */
+.pp-card__category {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+/* ── Purchases ── */
+.pp-card__purchases {
+  font-size: 0.72rem;
+  color: var(--text-mid);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .pp-track__item { flex: 0 0 150px; }
+  .pp-slider-wrap { padding: 0 10px; gap: 6px; }
+  .pp-track { gap: 12px; }
+
+  /* tidy card text on mobile */
+  .pp-card__body { padding: 9px 9px 11px; gap: 3px; }
+  .pp-card__name { font-size: 0.78rem; }
+  .pp-card__category { font-size: 0.56rem; }
+  .pp-card__meta { margin-top: 1px; }
+  .pp-card__rating { font-size: 0.72rem; }
+  .pp-card__purchases { font-size: 0.66rem; }
+  .pp-card__badge {
+    width: 38px; height: 38px;
+    font-size: 0.48rem;
+    top: 7px; left: 7px;
+  }
+  .pp-arrow { width: 30px; height: 30px; font-size: 1.1rem; }
+}
+
+@media (max-width: 600px) {
+  /* 3 cards visible on any mobile width */
+  .pp-track__item { flex: 0 0 calc(33.333% - 6px); }
+  .pp-track { gap: 8px; align-items: stretch; padding: 6px 2px 10px; }
+  .pp-slider-wrap { padding: 0 2px; gap: 2px; }
+  .pp-arrow { width: 18px; height: 18px; font-size: 0.75rem; }
+
+  /* uniform, tidy cards */
+  .pp-card { height: 100%; padding: 1px; }
+  .pp-card__body { padding: 3px 4px 5px; gap: 1px; background: #fff; }
+  .pp-card__name {
+    font-size: 0.7rem;
+    line-height: 1.25;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    font-weight: 700;
+  }
+  .pp-card__category {
+    font-size: 0.52rem;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pp-card__meta { margin-top: 2px; }
+  .pp-card__rating { font-size: 0.64rem; gap: 2px; }
+  .pp-card__star { font-size: 0.64rem; }
+  .pp-card__purchases { font-size: 0.58rem; }
+  .pp-card__badge {
+    width: 30px; height: 30px;
+    font-size: 0.4rem;
+    padding: 3px 2px;
+    top: 5px; left: 5px;
+  }
+}
