@@ -26,7 +26,7 @@ const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const KeywordList = lazy(() => import("./pages/KeywordList"));
 const KeywordPage = lazy(() => import("./pages/KeywordPage"));
 const GoogleReviews = lazy(() => import("./components/GoogleReviews"));
-const SendOrderMail = lazy(() => import("./components/SendOrderMail"));
+const SendOrderMail = lazy(() => import("./components/sendOrderMail"));
 const NewLandingPage = lazy(() => import("./components/NewLandingPage"));
 const PopularProducts = lazy(() => import("./components/PopularProducts"));
 const OfferProducts = lazy(() => import("./components/OfferProducts"));
