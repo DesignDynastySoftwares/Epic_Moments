@@ -1,11 +1,10 @@
-# Deploying Epic Moments to Oracle Cloud (OCI)
+# Deploying Epic Moments to AWS EC2
 
-This guide deploys the full stack on a single **Oracle Cloud free-tier VM**
-(Ubuntu). MongoDB stays on **Atlas** (already in use).
+Single EC2 instance (Amazon Linux 2023). MongoDB stays on Atlas.
 
 ```
-Oracle VM (Ubuntu)
-├── Nginx (80/443)  →  static frontend + admin, proxies /api to backend
+EC2 (Amazon Linux)
+├── Nginx (80/443)  ->  static frontend + admin, proxies /api and /socket.io to backend
 ├── Node backend (PM2, :4000)
 └── MongoDB Atlas (cloud)
 ```
@@ -14,39 +13,25 @@ Repo: https://github.com/DesignDynastySoftwares/Epic_Moments
 
 ---
 
-## 1. Create the Oracle Cloud VM
+## 1. Launch the instance
 
-1. Sign in to **cloud.oracle.com** → **Compute → Instances → Create Instance**.
-2. Image: **Canonical Ubuntu 22.04**. Shape: **VM.Standard.A1.Flex** (Always Free —
-   up to 4 OCPU / 24 GB) or an Always-Free AMD micro shape.
-3. Add your **SSH public key** (download the private key).
-4. Create. Note the **public IP**.
-
-### Open ports (firewall)
-- In OCI console: **VCN → Security List** → add **Ingress rules** for TCP **80**
-  and **443** from `0.0.0.0/0`.
-- On the VM itself:
-  ```bash
-  sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 80 -j ACCEPT
-  sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
-  sudo netfilter-persistent save
-  ```
+1. EC2 -> Launch instance -> Amazon Linux 2023, t3.small or larger recommended (micro instances need swap for builds).
+2. Security group inbound rules: SSH 22 (your IP only), HTTP 80 and HTTPS 443 from 0.0.0.0/0.
+3. Allocate an Elastic IP and associate it with the instance so the IP survives restarts.
 
 ---
 
-## 2. Connect + install prerequisites
+## 2. Install prerequisites
 
 ```bash
-ssh -i /path/to/private-key ubuntu@<VM_PUBLIC_IP>
+sudo dnf update -y
+sudo dnf install -y git nginx
+sudo systemctl enable --now nginx
 
-# Node.js 20 LTS
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# Nginx, git, PM2
-sudo apt-get update
-sudo apt-get install -y nginx git
-sudo npm install -g pm2
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+source ~/.bashrc
+nvm install 20
+npm install -g pm2
 ```
 
 ---
@@ -54,122 +39,121 @@ sudo npm install -g pm2
 ## 3. Clone the repo
 
 ```bash
-sudo mkdir -p /var/www
-sudo chown -R $USER:$USER /var/www
-cd /var/www
-git clone https://github.com/DesignDynastySoftwares/Epic_Moments.git epicmoments-src
+cd ~
+git clone https://github.com/DesignDynastySoftwares/Epic_Moments.git
 ```
 
 ---
 
-## 4. Add environment files (secrets — server only)
+## 4. Environment files (server only, gitignored)
 
 ```bash
-cd /var/www/epicmoments-src
-
-# Backend
+cd ~/Epic_Moments
 cp backend/.env.example backend/.env
-nano backend/.env          # fill real Mongo, JWT, Cloudinary, Razorpay LIVE, Gmail
-
-# Frontend (build-time)
 cp frontend/.env.example frontend/.env
-nano frontend/.env         # VITE_BACKEND_URL=https://myepicmoments.com , live Razorpay key
-
-# Admin (build-time)
 cp admin/.env.example admin/.env
-nano admin/.env            # VITE_BACKEND_URL=https://myepicmoments.com
+vi backend/.env
+vi frontend/.env
+vi admin/.env
 ```
+
+- backend: Mongo, JWT, Cloudinary, Razorpay live keys, Gmail
+- frontend and admin: `VITE_BACKEND_URL=https://myepicmoments.com`, live Razorpay key in frontend
+
+Vite variables are baked in at build time, so rebuild after changing them.
 
 ---
 
-## 5. Build + deploy
+## 5. Web root and Nginx config
 
 ```bash
-cd /var/www/epicmoments-src
-mkdir -p /var/www/epicmoments/{frontend,admin}
-bash deploy/deploy.sh
-```
-
-The script builds frontend + admin, copies the `dist/` output to
-`/var/www/epicmoments/`, and starts the backend under PM2.
-
-Make PM2 start on reboot:
-```bash
-pm2 startup      # run the command it prints
-pm2 save
-```
-
----
-
-## 6. Configure Nginx
-
-```bash
-sudo cp /var/www/epicmoments-src/deploy/nginx.conf \
-        /etc/nginx/sites-available/epicmoments
-sudo ln -s /etc/nginx/sites-available/epicmoments /etc/nginx/sites-enabled/
-sudo rm -f /etc/nginx/sites-enabled/default
+sudo mkdir -p /var/www/epicmoments/frontend /var/www/epicmoments/admin
+sudo chown -R $USER:$USER /var/www/epicmoments
+sudo cp ~/Epic_Moments/deploy/nginx.conf /etc/nginx/conf.d/epicmoments.conf
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
 ---
 
-## 7. Point the domain (DNS)
+## 6. Build and deploy
 
-At your domain registrar for **myepicmoments.com**:
+```bash
+cd ~/Epic_Moments
+bash deploy/deploy.sh
+```
 
-| Type | Name  | Value            |
-|------|-------|------------------|
-| A    | @     | `<VM_PUBLIC_IP>` |
-| A    | www   | `<VM_PUBLIC_IP>` |
-| A    | admin | `<VM_PUBLIC_IP>` |
+Start PM2 on reboot:
 
-Wait for DNS to propagate (minutes–hours).
+```bash
+pm2 startup
+pm2 save
+```
+
+Run the sudo command that `pm2 startup` prints, then run `pm2 save` again. Confirm with `systemctl is-enabled pm2-ec2-user`.
 
 ---
 
-## 8. HTTPS (free SSL via Let's Encrypt)
+## 7. DNS (GoDaddy)
+
+| Type | Name  | Value      |
+|------|-------|------------|
+| A    | @     | Elastic IP |
+| A    | www   | Elastic IP |
+| A    | admin | Elastic IP |
+
+Check with `dig @8.8.8.8 <name> +short` until all three return the Elastic IP.
+
+---
+
+## 8. HTTPS (Let's Encrypt)
 
 ```bash
-sudo apt-get install -y certbot python3-certbot-nginx
-sudo certbot --nginx \
-  -d myepicmoments.com -d www.myepicmoments.com -d admin.myepicmoments.com
+sudo dnf install -y augeas-libs cronie
+sudo systemctl enable --now crond
+sudo python3 -m venv /opt/certbot
+sudo /opt/certbot/bin/pip install certbot certbot-nginx
+sudo ln -s /opt/certbot/bin/certbot /usr/bin/certbot
+sudo certbot --nginx -d myepicmoments.com -d www.myepicmoments.com -d admin.myepicmoments.com
+echo "0 0,12 * * * root /opt/certbot/bin/python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab
+sudo certbot renew --dry-run
 ```
-Certbot updates the Nginx config to serve HTTPS and auto-renews.
+
+Certbot edits `/etc/nginx/conf.d/epicmoments.conf` directly. `deploy.sh` does not overwrite it, so HTTPS survives redeploys. The `deploy/nginx.conf` in the repo is the HTTP-only starting point. If you change it, apply the same change to the live file by hand.
 
 ---
 
 ## 9. Verify
 
-- Storefront: `https://myepicmoments.com`
-- Admin: `https://admin.myepicmoments.com`
-- API health: `https://myepicmoments.com/api/...`
-- Place a small real Razorpay order (₹1–10) to confirm payments.
-- Google Search Console → verify + submit `https://myepicmoments.com/sitemap.xml`.
+- https://myepicmoments.com
+- https://admin.myepicmoments.com
+- https://myepicmoments.com/api/
+- Place a small real Razorpay order to confirm payments.
 
 ---
 
-## Updating later (after code changes)
+## Updating later
 
 ```bash
-cd /var/www/epicmoments-src
+cd ~/Epic_Moments
 bash deploy/deploy.sh
 ```
-Pulls latest `main`, rebuilds, redeploys, restarts backend, reloads Nginx.
 
----
+Run it after pushing code to GitHub, or after changing `frontend/.env` or `admin/.env`. After changing `backend/.env`, `pm2 restart epic-backend` is enough.
 
 ## Useful commands
 
 ```bash
-pm2 status                 # backend process
-pm2 logs epic-backend      # backend logs
+pm2 status
+pm2 logs epic-backend
 sudo tail -f /var/log/nginx/error.log
 sudo systemctl reload nginx
+sudo certbot renew --dry-run
 ```
 
 ## Notes
-- Keep `backend/.env`, `frontend/.env`, `admin/.env` on the server only (gitignored).
-- MongoDB Atlas: allow the VM's public IP in **Atlas → Network Access**.
-- If the frontend can't reach the API, confirm `VITE_BACKEND_URL` and rebuild
-  (Vite env vars are baked in at build time).
+
+- MongoDB Atlas: add the Elastic IP under Network Access.
+- Linux filenames are case-sensitive. An import like `./components/SendOrderMail` builds on Windows or macOS but fails here if the file is `sendOrderMail.jsx`.
+- If a build prints "Killed", the instance ran out of memory. Add swap or use a larger instance type.
+- Keep `.env` files on the server only.
